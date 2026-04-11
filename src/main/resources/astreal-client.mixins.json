@@ -1,0 +1,10 @@
+{
+  "package": "com.astreal.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "FullbrightMixin",
+    "CrystalOptimizerMixin",
+    "NoHurtCamMixin"
+  ]
+}
+
