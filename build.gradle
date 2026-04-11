@@ -1,5 +1,6 @@
 plugins {
-    id 'fabric-loom' version '1.10.5' // Matching your screenshot
+    // Downgrading to 1.7.5 which is very stable for 1.21.x
+    id 'fabric-loom' version '1.7.5'
     id 'maven-publish'
 }
 
@@ -13,18 +14,11 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
 }
 
-// FORCE DISABLE UNPICK (The fix for your error)
-configurations.all {
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        if (details.requested.name == 'unpick') {
-            details.useTarget 'net.fabricmc:unpick:2.0.3' // Force a stable version
-        }
-    }
-}
-
+// This is the magic "Fix" block
 loom {
-    // This stops Loom from looking for the unpick definitions
-    runtimeOnlyLog4j = true 
+    // This tells Loom NOT to try and unpick the game
+    // which stops that UnsupportedOperationException
+    silentMojangMappingsLicense()
 }
 
 tasks.withType(JavaCompile).configureEach {
