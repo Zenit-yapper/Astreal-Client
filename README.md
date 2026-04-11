@@ -12,5 +12,4 @@ The definitive all-in-one Minecraft client bridging the gap between Lunar, Feath
 *Direct download links are generated automatically by GitHub Actions in the "Actions" tab.*
 
 ## 🛠️ Development
-Powered by **Player.games** and the **Astreal AI** engine.
-
+Powered by **Zenit**.
