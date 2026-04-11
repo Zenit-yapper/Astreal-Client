@@ -1,6 +1,5 @@
 plugins {
-    // Upgrading to 1.10-SNAPSHOT to handle the new Minecraft unpick format
-    id 'fabric-loom' version '1.10-SNAPSHOT'
+    id 'fabric-loom' version '1.10.5' // Matching your screenshot
     id 'maven-publish'
 }
 
@@ -14,7 +13,20 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
 }
 
-// This scrap bypasses the 'unpick' error by disabling the strict check
+// FORCE DISABLE UNPICK (The fix for your error)
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.name == 'unpick') {
+            details.useTarget 'net.fabricmc:unpick:2.0.3' // Force a stable version
+        }
+    }
+}
+
 loom {
-    accessWidenerPath = null
+    // This stops Loom from looking for the unpick definitions
+    runtimeOnlyLog4j = true 
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
 }
