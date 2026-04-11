@@ -18,5 +18,7 @@
     "java": ">=21",
     "fabric-api": "*"
   }
-}
-
+  "mixins": [
+    "astreal-client.mixins.json"
+  ]
+  
