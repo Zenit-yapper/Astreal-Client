@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.8.13'
+    id 'fabric-loom' version '1.8.13' // Keep the version that worked for your Gradle 8.12
     id 'maven-publish'
 }
 
@@ -11,15 +11,16 @@ repositories {
 }
 
 dependencies {
+    // We are using official mappings to avoid the "unpick" crash
     minecraft "com.mojang:minecraft:1.21.11"
-    mappings "net.fabricmc:yarn:1.21.11+build.1:v2"
+    mappings loom.officialMojangMappings() 
+    
     modImplementation "net.fabricmc:fabric-loader:0.18.6"
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
 }
 
 loom {
-    // This is the standard way to handle the license in 1.8.x
-    // It replaces the silentMojangMappingsLicense() call
+    // Standard configuration for Gradle 8.12
     it.runs.named("client") {
         ideConfigGenerated(true)
     }
