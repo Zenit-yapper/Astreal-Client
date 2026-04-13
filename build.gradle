@@ -1,6 +1,5 @@
 plugins {
-    // 1.8-SNAPSHOT is the sweet spot for 1.21.11 stability
-    id 'fabric-loom' version '1.8-SNAPSHOT'
+    id 'fabric-loom' version '1.8.13'
     id 'maven-publish'
 }
 
@@ -8,7 +7,7 @@ version = "1.0.0"
 group = "com.astreal"
 
 repositories {
-    maven { url = "https://maven.fabricmc.net/" } // Explicitly add the Fabric repository
+    maven { url = "https://maven.fabricmc.net/" }
 }
 
 dependencies {
@@ -19,8 +18,11 @@ dependencies {
 }
 
 loom {
-    // This is the critical line to stop the "Unpick" crash
-    silentMojangMappingsLicense()
+    // This is the standard way to handle the license in 1.8.x
+    // It replaces the silentMojangMappingsLicense() call
+    it.runs.named("client") {
+        ideConfigGenerated(true)
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
