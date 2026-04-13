@@ -1,11 +1,15 @@
 plugins {
-    // Downgrading to 1.7.5 which is very stable for 1.21.x
-    id 'fabric-loom' version '1.7.5'
+    // 1.8-SNAPSHOT is the sweet spot for 1.21.11 stability
+    id 'fabric-loom' version '1.8-SNAPSHOT'
     id 'maven-publish'
 }
 
 version = "1.0.0"
 group = "com.astreal"
+
+repositories {
+    maven { url = "https://maven.fabricmc.net/" } // Explicitly add the Fabric repository
+}
 
 dependencies {
     minecraft "com.mojang:minecraft:1.21.11"
@@ -14,10 +18,8 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21"
 }
 
-// This is the magic "Fix" block
 loom {
-    // This tells Loom NOT to try and unpick the game
-    // which stops that UnsupportedOperationException
+    // This is the critical line to stop the "Unpick" crash
     silentMojangMappingsLicense()
 }
 
