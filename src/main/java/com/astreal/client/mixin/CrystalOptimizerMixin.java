@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(MinecraftClient.class)
+@Mixin(net.minecraft.client.Minecraft.class)
 public class CrystalOptimizerMixin {
     @Inject(method = "doItemUse", at = @At("HEAD"))
     private void onCrystalPlace(CallbackInfo ci) {
