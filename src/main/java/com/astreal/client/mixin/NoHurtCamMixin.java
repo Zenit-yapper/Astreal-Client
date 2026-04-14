@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(GameRenderer.class)
+@Mixin(net.minecraft.client.renderer.GameRenderer.class)
 public class NoHurtCamMixin {
     @Inject(method = "tiltViewWhenHurt", at = @At("HEAD"), cancellable = true)
     private void disableHurtTilt(CallbackInfo ci) {
